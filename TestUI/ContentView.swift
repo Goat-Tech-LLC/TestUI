@@ -9,51 +9,73 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @State private var selectedRange: String = "Choose a range"
+    let glassAccentLight = Color(red: 190/255, green: 132/255, blue: 93/255)
+    let glassAccentDark = Color(red: 88/255, green: 30/255, blue: 0/255)
+    @Environment(\.colorScheme) var colorScheme
+
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+        ZStack {
+
+        VStack(spacing: 20) {
+            Menu {
+                Button("140-145") {
+                    selectedRange = "140-145"
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-            .toolbar {
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                Button("150-155") {
+                    selectedRange = "150-155"
                 }
+                Button("160-165") {
+                    selectedRange = "160-165"
+                }
+                Button("165-170") {
+                    selectedRange = "165-170"
+                }
+            } label: {
+                HStack {
+                    Text(selectedRange)
+                        .foregroundStyle(selectedRange == "Choose a range" ? .orange.opacity(0.6) : .primary)
+                    Spacer()
+                    Image(systemName: "chevron.down")
+                        .foregroundStyle(Color(red: 190, green: 132, blue: 93))
+                }
+                .padding()
+                .background(Color(uiColor: .secondarySystemFill))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color(uiColor: .systemGray4), lineWidth: 1)
+                )
             }
-        } detail: {
-            Text("Select an item")
+            .padding(.horizontal)
+            Button {
+                
+            }
+            label: {
+                Spacer()
+                Text("hi")
+                    .foregroundStyle(.primary)
+                Spacer()
+            }
+            .buttonStyle(.glassProminent)
+            .modify {
+                view in
+                    if(colorScheme == .light) {
+                        view.tint(glassAccentLight)
+                    }
+                    else {
+                        view.tint(glassAccentDark)
+                    }
+            }
+            .padding(.horizontal)
         }
+    }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }
