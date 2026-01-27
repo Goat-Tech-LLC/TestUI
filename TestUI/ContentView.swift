@@ -35,10 +35,10 @@ struct ContentView: View {
             } label: {
                 HStack {
                     Text(selectedRange)
-                        .foregroundStyle(selectedRange == "Choose a range" ? .orange.opacity(0.6) : .primary)
+                        .foregroundStyle(selectedRange == "Choose a range" ? glassAccentLight : .primary)
                     Spacer()
                     Image(systemName: "chevron.down")
-                        .foregroundStyle(Color(red: 190, green: 132, blue: 93))
+                        .foregroundStyle(glassAccentLight)
                 }
                 .padding()
                 .background(Color(uiColor: .secondarySystemFill))
