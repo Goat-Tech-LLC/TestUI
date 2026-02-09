@@ -16,61 +16,64 @@ struct ContentView: View {
 
 
     var body: some View {
-        ZStack {
-
-        VStack(spacing: 20) {
-            Menu {
-                Button("140-145") {
-                    selectedRange = "140-145"
-                }
-                Button("150-155") {
-                    selectedRange = "150-155"
-                }
-                Button("160-165") {
-                    selectedRange = "160-165"
-                }
-                Button("165-170") {
-                    selectedRange = "165-170"
-                }
-            } label: {
-                HStack {
-                    Text(selectedRange)
-                        .foregroundStyle(selectedRange == "Choose a range" ? glassAccentLight : .primary)
-                    Spacer()
-                    Image(systemName: "chevron.down")
-                        .foregroundStyle(glassAccentLight)
-                }
-                .padding()
-                .background(Color(uiColor: .secondarySystemFill))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color(uiColor: .systemGray4), lineWidth: 1)
-                )
-            }
-            .padding(.horizontal)
-            Button {
-                
-            }
-            label: {
-                Spacer()
-                Text("hi")
-                    .foregroundStyle(.primary)
-                Spacer()
-            }
-            .buttonStyle(.glassProminent)
-            .modify {
-                view in
-                    if(colorScheme == .light) {
-                        view.tint(glassAccentLight)
-                    }
-                    else {
-                        view.tint(glassAccentDark)
-                    }
-            }
-            .padding(.horizontal)
+        VStack {
+            QuickActionsTabDemo()
         }
-    }
+//        ZStack {
+//
+//        VStack(spacing: 20) {
+//            Menu {
+//                Button("140-145") {
+//                    selectedRange = "140-145"
+//                }
+//                Button("150-155") {
+//                    selectedRange = "150-155"
+//                }
+//                Button("160-165") {
+//                    selectedRange = "160-165"
+//                }
+//                Button("165-170") {
+//                    selectedRange = "165-170"
+//                }
+//            } label: {
+//                HStack {
+//                    Text(selectedRange)
+//                        .foregroundStyle(selectedRange == "Choose a range" ? glassAccentLight : .primary)
+//                    Spacer()
+//                    Image(systemName: "chevron.down")
+//                        .foregroundStyle(glassAccentLight)
+//                }
+//                .padding()
+//                .background(Color(uiColor: .secondarySystemFill))
+//                .clipShape(RoundedRectangle(cornerRadius: 12))
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 12)
+//                        .stroke(Color(uiColor: .systemGray4), lineWidth: 1)
+//                )
+//            }
+//            .padding(.horizontal)
+//            Button {
+//                
+//            }
+//            label: {
+//                Spacer()
+//                Text("hi")
+//                    .foregroundStyle(.primary)
+//                Spacer()
+//            }
+//            .buttonStyle(.glassProminent)
+//            .modify {
+//                view in
+//                    if(colorScheme == .light) {
+//                        view.tint(glassAccentLight)
+//                    }
+//                    else {
+//                        view.tint(glassAccentDark)
+//                    }
+//            }
+//            .padding(.horizontal)
+//        }
+//    }
     }
 
 
